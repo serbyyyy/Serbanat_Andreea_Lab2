@@ -40,6 +40,15 @@
             @Html.DisplayFor(model => model.Book.PublishingDate)
         </dd>
 
+        <dt class="col-sm-2">
+            Categories
+        </dt>
+        <dd class="col-sm-10">
+            @(string.Join(", ", Model.Book.BookCategories
+                .Where(bc => bc.Category != null)
+                .Select(bc => bc.Category.CategoryName)))
+        </dd>
+
     </dl>
 </div>
 <div>

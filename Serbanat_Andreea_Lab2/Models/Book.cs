@@ -26,5 +26,10 @@ namespace Serbanat_Andreea_Lab2.Models
 
         public Authors? Authors { get; set; }
 
+
+        public ICollection<BookCategory> BookCategories { get; set; } = new List<BookCategory>();
+
+
+
     }
 }

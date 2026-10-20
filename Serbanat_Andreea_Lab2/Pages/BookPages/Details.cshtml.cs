@@ -23,10 +23,14 @@ public class DetailsModel : PageModel
         }
 
 
+
         var book = await _context.Book
             .Include(b => b.Authors)
             .Include(b => b.Publisher)
+            .Include(b => b.BookCategories)
+                .ThenInclude(bc => bc.Category)
             .FirstOrDefaultAsync(m => m.ID == id);
+
 
         if (book is null)
         {

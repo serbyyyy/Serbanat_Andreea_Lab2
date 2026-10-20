@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Index.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Pages\Books\" />
     <Folder Include="Pages\Authors\" />
+    <Folder Include="Pages\CategoryPages\" />
     <Folder Include="Pages\Publishers\" />
   </ItemGroup>
 

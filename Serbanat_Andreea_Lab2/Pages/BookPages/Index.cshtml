@@ -1,4 +1,6 @@
-@page
+
+@page "/"
+
 @model Serbanat_Andreea_Lab2.Pages.BookPages.IndexModel
 
 @{
@@ -30,6 +32,8 @@
                 @Html.DisplayNameFor(model => model.Book[0].Publisher!.PublisherName)
             </th>
 
+            
+            <th>Categories</th>
 
             <th></th>
         </tr>
@@ -56,6 +60,12 @@
                     @Html.DisplayFor(modelItem => item.Publisher!.PublisherName)
                 </td>
 
+
+                <td>
+                    @(string.Join(", ", item.BookCategories
+                        .Where(bc => bc.Category != null)
+                        .Select(bc => bc.Category.CategoryName)))
+                </td>
 
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

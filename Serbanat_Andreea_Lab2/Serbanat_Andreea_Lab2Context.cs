@@ -8,5 +8,9 @@ public class Serbanat_Andreea_Lab2Context(DbContextOptions<Serbanat_Andreea_Lab2
 
     public DbSet<Serbanat_Andreea_Lab2.Models.Authors> Authors { get; set; } = default!;
 
+    public DbSet<Serbanat_Andreea_Lab2.Models.Category> Category { get; set; } = default!;
+
+    public DbSet<Serbanat_Andreea_Lab2.Models.BookCategory> BookCategory { get; set; } = default!;
+
 
 }
