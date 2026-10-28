@@ -16,8 +16,24 @@ public class IndexModel : PageModel
 
     public IList<Book> Book { get; set; } = default!;
 
-    public async Task OnGetAsync()
+    public string TitleSort { get; set; } = string.Empty;
+
+    public string AuthorSort { get; set; } = string.Empty;
+
+    public string CurrentFilter { get; set; } = string.Empty;
+
+
+
+    public async Task OnGetAsync(string? sortOrder, string? searchString)
+
+
     {
+
+        TitleSort = string.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+
+        AuthorSort = sortOrder == "author" ? "author_desc" : "author";
+
+        CurrentFilter = searchString ?? string.Empty;
 
 
         Book = await _context.Book
@@ -26,6 +42,35 @@ public class IndexModel : PageModel
             .Include(b => b.BookCategories)
                 .ThenInclude(bc => bc.Category)
             .ToListAsync();
+
+        if (!string.IsNullOrWhiteSpace(searchString))
+        {
+            Book = Book.Where(b =>
+                b.Title.Contains(searchString) ||
+                (b.Authors != null &&
+                    (b.Authors.FirstName.Contains(searchString) ||
+                     b.Authors.LastName.Contains(searchString)))
+            ).ToList();
+        }
+
+        switch (sortOrder)
+        {
+            case "title_desc":
+                Book = Book.OrderByDescending(b => b.Title).ToList();
+                break;
+
+            case "author_desc":
+                Book = Book.OrderByDescending(b => b.Authors?.FullName ?? "").ToList();
+                break;
+
+            case "author":
+                Book = Book.OrderBy(b => b.Authors?.FullName ?? "").ToList();
+                break;
+
+            default:
+                Book = Book.OrderBy(b => b.Title).ToList();
+                break;
+        }
 
 
 
