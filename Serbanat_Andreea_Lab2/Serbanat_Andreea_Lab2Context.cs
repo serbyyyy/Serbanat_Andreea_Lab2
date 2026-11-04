@@ -12,5 +12,10 @@ public class Serbanat_Andreea_Lab2Context(DbContextOptions<Serbanat_Andreea_Lab2
 
     public DbSet<Serbanat_Andreea_Lab2.Models.BookCategory> BookCategory { get; set; } = default!;
 
+    public DbSet<Serbanat_Andreea_Lab2.Models.Member> Member { get; set; } = default!;
+
+    public DbSet<Serbanat_Andreea_Lab2.Models.Borrowing> Borrowing { get; set; } = default!;
+
+
 
 }
